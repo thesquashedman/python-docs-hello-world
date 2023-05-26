@@ -9,7 +9,12 @@ def connection():
     
     
     
-    cnxn = pyodbc.connect('DRIVER={Devart ODBC Driver for SQL Server};Server=pavelserver.mysql.database.azure.com;Database=library;Port=3306;User ID=thesquashedman;Password=Mesoepic2')
+    server = 'tcp:paveldatabasewebapp.azurewebsites.net:3306' 
+    database = 'library' 
+    username = 'thesquashedman' 
+    password = 'Mesoepic2'
+    # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
+    cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
     cursor.execute("SELECT * FROM test where testvar LIKE '%1%';")
 
