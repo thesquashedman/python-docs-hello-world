@@ -6,19 +6,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def connection():
-    Driver = "{ODBC Driver 17 for SQL Server}"
-    Server = "pavelserver.mysql.database.azure.com"
-    Port = 3306
-    Database = "library"
-    Uid = "thesquashedman"
-    Pwd = "Mesoepic2"
     
-    try:
-        cnxn = pyodbc.connect(f'DRIVER={Driver};SERVER={Server};DATABASE={Database};Uid={Uid};Pwd={Pwd};Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;')
-        cursor = cnxn.cursor()
-        cursor.execute(f"SELECT * FROM test where testvar LIKE '%1%';")
+    
+    
+    cnxn = pyodbc.connect('DRIVER={Devart ODBC Driver for SQL Server};Server=pavelserver.mysql.database.azure.com;Database=library;Port=3306;User ID=thesquashedman;Password=Mesoepic2')
+    cursor = cnxn.cursor()
+    cursor.execute("SELECT * FROM test where testvar LIKE '%1%';")
 
-    for row in cursor:
-        print('row = %r' % (row,))
+    row = cursor.fetchone() 
+    while row:
+        print (row) 
+        row = cursor.fetchone()
     return "Connection to database successful"
 
