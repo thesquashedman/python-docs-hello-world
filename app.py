@@ -9,7 +9,7 @@ def connection():
     
     
     
-    server = 'tcp:paveldatabasewebapp.azurewebsites.net:3306' 
+    server = 'tcp:pavelserver.mysql.database.azure.com:3306' 
     database = 'library' 
     username = 'thesquashedman' 
     password = 'Mesoepic2'
