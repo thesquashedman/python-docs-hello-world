@@ -14,7 +14,7 @@ def connection():
     Pwd = "Mesoepic2"
     
     try:
-        cnxn = pyodbc.connect(f'DRIVER={Driver};SERVER={Server};DATABASE={Database};Uid={Uid};Pwd={Pwd};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+        cnxn = pyodbc.connect(f'DRIVER={Driver};SERVER={Server};DATABASE={Database};Uid={Uid};Pwd={Pwd};Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;')
         cursor = cnxn.cursor()
         cursor.execute(f"SELECT * FROM test where testvar LIKE '%1%';")
 
