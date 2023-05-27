@@ -1,18 +1,20 @@
 from flask import Flask
 from sqlalchemy import create_engine
 import pyodbc
+import mysql.connector
 
 app = Flask(__name__)
 
 @app.route('/')
 def connection():
     
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};Server=pavelserver.mysql.database.azure.com;Database=library;Port=3306;User ID=thesquashedman;Password=Mesoepic2;Encrypt=YES;Trusted_Connection=yes;ssl_ca=DigiCertGlobalRootCA.crt.pem;ssl_disabled=False)')
+    cnxn = mysql.connector.connect(user="thesquashedman", password="Mesoepic2", host="pavelserver.mysql.database.azure.com", port=3306, database="library", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
     cursor = cnxn.cursor()
-    cursor.execute("SELECT * FROM test where testvar LIKE '%1%';")
-
+    cursor.execute("SELECT * FROM test;")
+    
     row = cursor.fetchone() 
     while row:
         print (row) 
         row = cursor.fetchone()
     return "Connection to database successful"
+
