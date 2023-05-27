@@ -7,14 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def connection():
     
-    
-    
-    server = 'tcp:pavelserver.mysql.database.azure.com:3306' 
-    database = 'library' 
-    username = 'thesquashedman' 
-    password = 'Mesoepic2'
-    # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
+    cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};Server=pavelserver.mysql.database.azure.com;Database=library;Port=3306;User ID=thesquashedman;Password=Mesoepic2;Encrypt=YES;Trusted_Connection=yes;ssl_ca=DigiCertGlobalRootCA.crt.pem;ssl_disabled=False)')
     cursor = cnxn.cursor()
     cursor.execute("SELECT * FROM test where testvar LIKE '%1%';")
 
@@ -23,4 +16,3 @@ def connection():
         print (row) 
         row = cursor.fetchone()
     return "Connection to database successful"
-
