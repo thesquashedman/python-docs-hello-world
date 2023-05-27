@@ -17,4 +17,3 @@ def connection():
         print (row) 
         row = cursor.fetchone()
     return "Connection to database successful"
-
